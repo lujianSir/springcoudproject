@@ -22,13 +22,19 @@ eureka:
   #      defaultZone: http://eureka-server:8761/eureka/
 
 #设置Hystrix熔断器判定超时时间
-#hystrix:
-#  command:
-#    default:
-#      execution:
-#        isolation:
-#          thread:
-#            timeoutInMilliseconds: 60000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+
 zuul:
   ignoredServices: '*'
   routes:

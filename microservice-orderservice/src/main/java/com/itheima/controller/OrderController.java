@@ -16,8 +16,7 @@ public class OrderController {
 	private OrderService orderService;
 
 	@PostMapping("/findOrderByUserId")
-	public RestMessage<List<Order>> findOrder(@RequestBody String json) {
-		String userId=JsonHelper.getString("userId",json);
+	public RestMessage<List<Order>> findOrder(@RequestParam(value="userId") String userId) {
 		List<Order> orders = orderService.findOrderByUserId(userId);
 		return RestMessage.newInstance(true, "成功", orders);
 	}
