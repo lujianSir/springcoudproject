@@ -4,6 +4,7 @@ import com.itheima.model.RestMessage;
 import com.itheima.model.User;
 import com.itheima.service.UserService;
 import com.itheima.util.JsonHelper;
+import com.netflix.client.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

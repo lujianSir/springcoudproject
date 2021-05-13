@@ -10,9 +10,28 @@
 	<properties>
 		<!--  配置镜像前缀（就是仓库服务地址） -->
 		<docker.image.prefix>192.168.198.135:5000</docker.image.prefix>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<logback.version>1.1.7</logback.version>
+		<slf4j.version>1.7.21</slf4j.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.itheima</groupId>
 			<artifactId>microservice-common</artifactId>
@@ -44,6 +63,12 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-feign</artifactId>
+		</dependency>
+
+		<!--SpringBoot中使用默认的redis的客户端-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
     </dependencies>
 	<build>
