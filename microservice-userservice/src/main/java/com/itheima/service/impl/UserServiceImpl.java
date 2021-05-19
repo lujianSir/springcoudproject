@@ -54,4 +54,21 @@ public class UserServiceImpl implements UserService {
         }
         return user;
     }
+
+    @Override
+    public void testMq() {
+        int i=0;
+        String msg="";
+        while (true){
+            if(i>=10){
+                break;
+            }
+             msg = "第"+(i+1)+"次rabbitmq消息队列";
+            //将消息携带绑定键值：TestDirectRouting 发送到交换机TestDirectExchange
+            rabbitTemplate.convertAndSend("TestDirectExchange", "TestDirectRouting", msg);
+            //记录单个文件错误
+            FileLogHelper.WriteLog("testMq", "发送消息:"+msg);
+            i++;
+        }
+    }
 }

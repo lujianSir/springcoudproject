@@ -9,4 +9,7 @@ public interface UserService {
      * @return
      */
     User findUserMsgByUserName(String username)throws Exception;
+
+
+    void testMq();
 }

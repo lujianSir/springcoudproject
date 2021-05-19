@@ -21,4 +21,15 @@ public class UserController {
 		User user=userService.findUserMsgByUserName(username);
 		return RestMessage.newInstance(true, "成功", user);
 	}
+
+	/**
+	 * 测试mq
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping("/testMq")
+	public RestMessage<String> testMq()throws Exception {
+		userService.testMq();
+		return RestMessage.newInstance(true, "成功", null);
+	}
 }
