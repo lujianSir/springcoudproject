@@ -11,4 +11,5 @@ public interface UserMapper {
 
     @Select("select * from tb_user where username =#{username}")
     User selectUser(String username);
+
 }

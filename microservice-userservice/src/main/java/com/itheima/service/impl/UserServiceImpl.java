@@ -1,6 +1,7 @@
 package com.itheima.service.impl;
 
 import com.itheima.mapper.UserMapper;
+import com.itheima.model.FileLogHelper;
 import com.itheima.model.Order;
 import com.itheima.model.RestMessage;
 import com.itheima.model.User;
@@ -46,6 +47,8 @@ public class UserServiceImpl implements UserService {
         try {
             //将消息携带绑定键值：TestDirectRouting 发送到交换机TestDirectExchange
             rabbitTemplate.convertAndSend("TestDirectExchange", "TestDirectRouting", msg);
+            //记录单个文件错误
+            FileLogHelper.WriteLog("findUserMsgByUserName", "消息:"+msg);
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
