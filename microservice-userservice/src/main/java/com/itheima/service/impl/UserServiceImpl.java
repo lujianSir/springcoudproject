@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
         String msg = "hello fanout";
         try {
             //将消息携带绑定键值：TestDirectRouting 发送到交换机TestDirectExchange
-            rabbitTemplate.convertAndSend("TestDirectExchange", "TestDirectRouting", msg);
+            rabbitTemplate.convertAndSend("TestDirectExchange1", "TestDirectRouting", msg);
             //记录单个文件错误
             FileLogHelper.WriteLog("findUserMsgByUserName", "消息:"+msg);
         }catch (Exception e){
