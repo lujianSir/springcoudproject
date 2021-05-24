@@ -1,14 +1,14 @@
 package com.itheima.model;
+
+
 import lombok.Data;
 
-import java.io.Serializable;
-import java.util.List;
+import javax.persistence.Table;
 
 @Data
-public class User implements Serializable{
-	private static final long serialVersionUID = 1L;
-	private Integer id;
-	private String username;
-	private Integer age;
-	private List<Order> orderList;
+public class User {
+    private Long id;
+    private String name;
+    private int age;
+    private String email;
 }

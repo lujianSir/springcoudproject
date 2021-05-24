@@ -1,10 +1,8 @@
 package com.itheima.controller;
 
 import com.itheima.model.RestMessage;
-import com.itheima.model.User;
+import com.itheima.model.UserModel;
 import com.itheima.service.UserService;
-import com.itheima.util.JsonHelper;
-import com.netflix.client.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +15,9 @@ public class UserController {
 	private UserService userService;
 
 	@PostMapping("/findUserMsgByUserName")
-	public RestMessage<User> findUserMsgByUserName(@RequestParam String username)throws Exception {
-		User user=userService.findUserMsgByUserName(username);
-		return RestMessage.newInstance(true, "成功", user);
+	public RestMessage<UserModel> findUserMsgByUserName(@RequestParam String username)throws Exception {
+		UserModel userModel =userService.findUserMsgByUserName(username);
+		return RestMessage.newInstance(true, "成功", userModel);
 	}
 
 	/**

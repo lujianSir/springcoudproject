@@ -4,7 +4,7 @@ import com.itheima.mapper.UserMapper;
 import com.itheima.model.FileLogHelper;
 import com.itheima.model.Order;
 import com.itheima.model.RestMessage;
-import com.itheima.model.User;
+import com.itheima.model.UserModel;
 import com.itheima.redis.RedisUtil;
 import com.itheima.resource.IOrderResouce;
 import com.itheima.service.UserService;
@@ -12,9 +12,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -33,14 +31,14 @@ public class UserServiceImpl implements UserService {
     RabbitTemplate rabbitTemplate;  //使用RabbitTemplate,这提供了接收/发送等等方法
 
     @Override
-    public User findUserMsgByUserName(String username) throws Exception{
-        User user=userMapper.selectUser(username);
-        redisUtil.setEx("username",user.getUsername(),1, TimeUnit.MINUTES);
-        RestMessage<List<Order>> restMessage= orderResouce.findOrder(user.getUsername());
+    public UserModel findUserMsgByUserName(String username) throws Exception{
+        UserModel userModel =userMapper.selectUser(username);
+        redisUtil.setEx("username", userModel.getUsername(),1, TimeUnit.MINUTES);
+        RestMessage<List<Order>> restMessage= orderResouce.findOrder(userModel.getUsername());
         if(!restMessage.isSuccess()){
             throw  new Exception(restMessage.getMessage());
         }
-        user.setOrderList(restMessage.getData());
+        userModel.setOrderList(restMessage.getData());
         System.out.println(redisUtil.get("username"));
 
         String msg = "hello fanout";
@@ -52,7 +50,7 @@ public class UserServiceImpl implements UserService {
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
-        return user;
+        return userModel;
     }
 
     @Override

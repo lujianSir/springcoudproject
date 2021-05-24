@@ -1,6 +1,6 @@
 package com.itheima.service;
 
-import com.itheima.model.User;
+import com.itheima.model.UserModel;
 
 public interface UserService {
     /**
@@ -8,7 +8,7 @@ public interface UserService {
      * @param username
      * @return
      */
-    User findUserMsgByUserName(String username)throws Exception;
+    UserModel findUserMsgByUserName(String username)throws Exception;
 
 
     void testMq();
