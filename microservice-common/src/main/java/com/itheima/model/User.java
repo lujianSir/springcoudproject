@@ -15,6 +15,16 @@ public class User {
     private int age;
     private String email;
 
+
+    public User(){
+
+    }
+
+    public User(String name,String email){
+        this.name=name;
+        this.email=email;
+    }
+
     /**
      * 创建时间
      */
