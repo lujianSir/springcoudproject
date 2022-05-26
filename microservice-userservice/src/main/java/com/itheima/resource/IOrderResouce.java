@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+@Service
 @FeignClient(value="order-service",fallback= OrderFallback.class)
 public interface IOrderResouce {
 
