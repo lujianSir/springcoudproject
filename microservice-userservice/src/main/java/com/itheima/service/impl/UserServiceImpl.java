@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
         userModel.setOrderList(restMessage.getData());
         System.out.println(redisUtil.get("username"));
 
-        String msg = "hello fanout =========================";
+        String msg = "hello fanout 你好=========================";
         try {
             //将消息携带绑定键值：TestDirectRouting 发送到交换机TestDirectExchange
             rabbitTemplate.convertAndSend("TestDirectExchange1", "TestDirectRouting", msg);
