@@ -16,6 +16,14 @@ public class OrderController {
 	@PostMapping("/findOrderByUserId")
 	public RestMessage<List<Order>> findOrder(@RequestParam(value="userId") String userId) {
 		List<Order> orders = orderService.findOrderByUserId(userId);
+
+
 		return RestMessage.newInstance(true, "成功", orders);
+	}
+
+	public static void main(String[] args) {
+		Test test=new Test.Builder().setStuName("zhangsan").setWeight(1).setStuAge(20).build();
+
+		Test1 test1=new Test1.Test1Builder().stuName("lisi").build();
 	}
 }

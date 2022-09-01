@@ -9,7 +9,7 @@ public class Order {
 
     private Integer id;
 
-    private String number;
+    private int number;
 
     private String userid;
 
