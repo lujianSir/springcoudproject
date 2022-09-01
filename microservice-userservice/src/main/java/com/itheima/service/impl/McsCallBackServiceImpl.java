@@ -26,9 +26,9 @@ public class McsCallBackServiceImpl implements McsCallBackService {
     @Override
     public void receiveMcsTask(String taskId) {
         //延迟2秒
-        redisUtil.zAdd(taskMcsMq,this.setMcsMqValue(taskId,"outbin"), Instant.now().plusSeconds(2).getEpochSecond());
+        redisUtil.zAdd(taskMcsMq,this.setMcsMqValue(taskId,"1"), Instant.now().plusSeconds(2).getEpochSecond());
         //延迟5秒
-        redisUtil.zAdd(taskMcsMq,this.setMcsMqValue(taskId,"end"), Instant.now().plusSeconds(5).getEpochSecond());
+        redisUtil.zAdd(taskMcsMq,this.setMcsMqValue(taskId,"2"), Instant.now().plusSeconds(5).getEpochSecond());
     }
 
     @Override
