@@ -66,10 +66,10 @@ public class CtuCallBackServiceImpl implements CtuCallBackService {
                 if(JsonHelper.getString("code",s).equals("0")){
                     // 删除已经执行的任务
                     redisUtil.zRemove(taskCtuMq, next.getValue());
-                    System.out.println(String.format("成功发送信息:【%s】",next.getValue()));
+                    System.out.println(String.format("【CTU】成功发送信息:【%s】",next.getValue()));
                 }else{
                     //打印报错信息
-                    System.out.println(String.format("报错回告信息提示:【%s】",JsonHelper.getString("message",s)));
+                    System.out.println(String.format("【CTU】报错回告信息提示:【%s】",JsonHelper.getString("message",s)));
                 }
             }
         }
