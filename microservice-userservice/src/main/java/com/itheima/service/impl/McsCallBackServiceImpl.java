@@ -6,11 +6,13 @@ import com.itheima.util.JsonHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class McsCallBackServiceImpl implements McsCallBackService {
@@ -83,5 +85,22 @@ public class McsCallBackServiceImpl implements McsCallBackService {
         String url = "http://192.168.41.39:10018/api/v1/mcs/task/taskReturn";
         ResponseEntity<String> stringResponseEntity = restTemplate.postForEntity(url, json, String.class);
         return stringResponseEntity.getBody();
+    }
+
+    public static void main(String[] args) {
+        ThreadPoolTaskExecutor threadPoolTaskExecutor=new ThreadPoolTaskExecutor();
+        threadPoolTaskExecutor.setCorePoolSize(100);
+        threadPoolTaskExecutor.setMaxPoolSize(200);
+        threadPoolTaskExecutor.initialize();
+        List<Object> list=new ArrayList<>();
+        for (int i = 0; i <100 ; i++) {
+            list.add(i);
+        }
+        for (Object o:list) {
+            CompletableFuture.runAsync(()->{
+                System.out.println(Thread.currentThread().getName());
+            },threadPoolTaskExecutor);
+        }
+
     }
 }
