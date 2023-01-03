@@ -1,5 +1,6 @@
 package com.itheima.service.impl;
 
+import com.itheima.model.ZxMcsInBoundResponseDto;
 import com.itheima.redis.RedisUtil;
 import com.itheima.service.McsCallBackService;
 import com.itheima.util.JsonHelper;
@@ -62,13 +63,13 @@ public class McsCallBackServiceImpl implements McsCallBackService {
      */
     private String setMcsMqValue(String taskId,String style){
         try {
-            Map<String,String> map=new HashMap<>();
-            map.put("taskId", taskId);
-            map.put("status", style);
-            List<String> list=new ArrayList<>();
-            list.add(JsonHelper.toJson(map));
-            Map<String,String> newMap=new HashMap<>();
-            newMap.put("carryList",JsonHelper.toJson(list));
+            List<ZxMcsInBoundResponseDto> zxMcsInBoundResponseDtoList=new ArrayList<>();
+            ZxMcsInBoundResponseDto zxMcsInBoundResponseDto=new ZxMcsInBoundResponseDto();
+            zxMcsInBoundResponseDto.setTaskId(taskId);
+            zxMcsInBoundResponseDto.setStatus(Integer.parseInt(style));
+            zxMcsInBoundResponseDtoList.add(zxMcsInBoundResponseDto);
+            Map<String,List> newMap=new HashMap<>();
+            newMap.put("carryList",zxMcsInBoundResponseDtoList);
             return JsonHelper.toJson(newMap);
         }catch (Exception e){
             System.out.println(e);
@@ -82,7 +83,7 @@ public class McsCallBackServiceImpl implements McsCallBackService {
      * @return
      */
     private String sendMcsMsg(String json) throws Exception {
-        String url = "http://192.168.41.39:10018/api/v1/mcs/task/taskReturn";
+        String url = "http://192.168.41.184:10018/api/v1/mcs/task/taskReturn";
         ResponseEntity<String> stringResponseEntity = restTemplate.postForEntity(url, json, String.class);
         return stringResponseEntity.getBody();
     }

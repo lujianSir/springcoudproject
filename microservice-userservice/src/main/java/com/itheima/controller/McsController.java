@@ -1,6 +1,8 @@
 package com.itheima.controller;
 
 import com.itheima.model.RestMessage;
+import com.itheima.model.ZxGcsCarryResponseDto;
+import com.itheima.model.ZxMcsCarryRequestDto;
 import com.itheima.service.CtuCallBackService;
 import com.itheima.service.McsCallBackService;
 import com.itheima.util.JsonHelper;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 @RestController
@@ -19,13 +23,14 @@ public class McsController {
 	private McsCallBackService mcsCallBackService;
 
 	@PostMapping("/Request")
-	public RestMessage<String> findUserMsgByUserName(@RequestBody String json)throws Exception {
+	public ZxGcsCarryResponseDto findUserMsgByUserName(@RequestBody String json)throws Exception {
 		try {
-			String taskId = JsonHelper.getString("taskId", json);
+			List<ZxMcsCarryRequestDto> zxMcsCarryRequestDtoList = JsonHelper.getKeyObjectList("carryList", json, ZxMcsCarryRequestDto.class);
+			String taskId = zxMcsCarryRequestDtoList.get(0).getTaskId();
 			mcsCallBackService.receiveMcsTask(taskId);
-			return RestMessage.newInstance(true, "0","成功", null);
+			return new ZxGcsCarryResponseDto(true,"");
 		}catch (Exception e){
-			return RestMessage.newInstance(false, "99",e.getMessage());
+			return new ZxGcsCarryResponseDto(false,e.getMessage());
 		}
 
 	}
