@@ -3,6 +3,7 @@ package com.itheima.scheduled;
 import com.itheima.service.CtuCallBackService;
 import com.itheima.service.LdRcsCallBackService;
 import com.itheima.service.McsCallBackService;
+import com.itheima.service.RcsCallBackService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -22,6 +23,18 @@ public class TimeTaskNew {
 
     @Autowired
     private LdRcsCallBackService ldRcsCallBackService;
+
+    @Autowired
+    private RcsCallBackService rcsCallBackService;
+
+    /**
+     * RCS回告
+     * @throws Exception
+     */
+    @Scheduled(initialDelay = 1000, fixedDelay = 1000)
+    public void dispatchTaskRcs() throws Exception {
+        rcsCallBackService.dispatchTaskRcs();
+    }
 
     /**
      * CTU回告
@@ -49,4 +62,5 @@ public class TimeTaskNew {
     public void dispatchTaskLdRcs() throws Exception {
         ldRcsCallBackService.dispatchTaskLdRcs();
     }
+
 }
